@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style type="text/css">
+        table {
+			margin: auto;
+		}
+		table tr th,td {
+			padding: 10px;
+		}
+
+		.col-6 {
+			width: 42%;
+			float: left;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		input[type=text],input[type=email],input[type=number],select {
+			height: 30px;
+			width: -webkit-fill-available;
+		}
+
+		textarea {
+			width: -webkit-fill-available;
+			height: 80px;
+		}
+
+		.edit {
+			background-color: blue;
+			margin-right: 5px;
+		}
+
+		.delete {
+			background-color: red;
+		}
+
+		.submit {
+			background-color: blue;
+		}
+		button {
+			padding: 15px 20px;
+			color: white;
+			border: none;
+		}
+		.show {
+			background-color: darkgray;
+			margin-right: 5px;
+		}
+
+		.alert {
+			color: white;
+			padding: 20px 10px;
+			margin: 10px 10px 10px 30px;
+			width: 50%;
+		}
+
+		#alert-danger {
+			background-color: red;
+		}
+
+		#alert-success {
+			background-color: rgb(17, 233, 31);
+		}
+
+		.update {
+			background-color: blue;
+		}
+    </style>
+</head>
+<body>
+    <div class="container">
+		<h1>CRUD Operations In Javascript</h1>
+		<d iv class="alert" id="alert-success">
+			<strong>Success!</strong> User is Deleted	
+		</div>
+
+		<div class="alert" id="alert-danger">
+			<strong>Oops!</strong> Somehing Error
+		</div>
+		<div class="row">
+			<div class="col-6">
+				<div id="form">
+					<form method="POST" id="addNewEmployee">
+						<table border="1" style="border-collapse:collapse; width: 90%;">
+							<tr>
+								<th>Name</th>
+								<td>
+									<input type="text" name="name" id="name">
+									<span id="e1"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<th>Email</th>
+								<td>
+									<input type="email" name="email" id="email">
+									<span id="e2"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<th>Age</th>
+								<td>
+									<input type="number" name="age" id="age">
+									<span id="e3"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<th>Designation</th>
+								<td>
+									<select name="designation" id="designation">
+										<option value="">Select</option>
+										<option value="PHP">PHP</option>
+										<option value="Java">Java</option>
+										<option value="Python">Python</option>
+									</select>
+									<span id="e4"></span>
+								</td>
+							</tr>
+
+							<tr>
+								<th colspan="2" id="btn_add_update">
+									<button type="submit" id="btn_add" name="submit" class="submit" onclick="return submitData();">Submit</button>
+								</th>
+							</tr>
+						</table>
+					</form>
+				</div>
+			</div>
+			<div class="col-6">
+				<div id="result"></div>		
+			</div>
+		</div>
+	</div>
+
+    <script type="text/javascript">
+		let alertSuccess = document.getElementById('alert-success');
+		let alertDanger = document.getElementById('alert-danger');
+
+		alertSuccess.style.display = 'none';
+		alertDanger.style.display = 'none';
+
+
+		  var url = "http://localhost/rest-api/api/read.php";
+        // var url = "http://localhost/rest-api/api/read.php";
+        getAllData();
+		function getAllData() {
+			var httpReq = new XMLHttpRequest();
+			
+			httpReq.open( "GET", url, false );
+            httpReq.send( null );
+		    var finalData = JSON.parse(httpReq.responseText);
+			if(httpReq.status==404) {
+		    	var notFound = finalData.message;
+		    } else {
+		    	var bodyData =  finalData.body;	
+		    }
+             
+            var html = '';
+		        html += '<table border="1" style="border-collapse:collapse; width: 80%;">';
+			        html += '<tr>';
+			    	    html += '<th>Sr.No</th>';
+			    	    html += '<th>Name</th>';
+			    	    html += '<th>Email</th>';
+			    	    html += '<th>Age</th>';
+			    	    html += '<th>Designation</th>';
+			    	    html += '<th>Action</th>';
+			        html += '</tr>';
+
+			        if (httpReq.status==404) {
+
+						html += '<tr>';
+				    	    html += '<th colspan="6" class="text-danger text-danger">No Record Found !</th>';
+				        html += '</tr>';
+
+
+			        } else {
+
+			        	for(var i = 0; i<bodyData.length; i++) {
+					    	html += '<tr>';
+					    		html += '<td>'+(i+1)+'</td>';
+						    	html += '<td>'+bodyData[i].name+'</td>';
+						    	html += '<td>'+bodyData[i].email+'</td>';
+						    	html += '<td>'+bodyData[i].age+'</td>';
+						    	html += '<td>'+bodyData[i].designation+'</td>';
+						    	html += '<th style="display: inline-flex;"><button type="button" class="edit" onclick="editData(`'+bodyData[i].id+'`)">Edit</button> <button type="button" class="show" onclick="showData(`'+bodyData[i].id+'`)">Show</button> <button type="button" class="delete" onclick="deleteData(`'+bodyData[i].id+'`)">Delete</button></th>';
+						    html += '</tr>';	
+			        }
+                }
+				html += '</table>';
+		   	document.getElementById('result').innerHTML = html;
+        }
+		   	
+        function submitData() {
+			
+	    	var e1 	= 	document.getElementById('e1');
+	    	var e2 	= 	document.getElementById('e2');
+	    	var e3 	= 	document.getElementById('e3');
+	    	var e4 	= 	document.getElementById('e4');
+
+	    	var nameOfUser =document.getElementById('name').value;
+	    	var email = 	document.getElementById('email').value;
+	    	var age = 	document.getElementById('age').value;
+	    	var designation = 	document.getElementById('designation').value;
+
+	    	if(nameOfUser=='') {
+	    		e1.innerHTML = 'Name can not be blank';
+	    		e1.style.color = 'red';
+	    	} else {
+	    		e1.innerHTML = '';
+	    	}
+
+	    	if(email=='') {
+	    		e2.innerHTML = 'Email can not be blank';
+	    		e2.style.color = 'red';
+	    	} else {
+	    		e2.innerHTML = '';
+	    	}
+
+	    	if(age=='') {
+	    		e3.innerHTML = 'Age can not be blank';
+	    		e3.style.color = 'red';
+	    	} else {
+	    		e3.innerHTML = '';
+	    	}
+
+	    	if(designation=='') {
+	    		e4.innerHTML = 'designation can not be blank';
+	    		e4.style.color = 'red';
+	    	} else {
+	    		e4.innerHTML = '';
+	    	}
+			if ((nameOfUser && email && age && designation) !=''){
+				let formData = {name:nameOfUser, email:email, age:age, designation:designation};
+				
+				let myJSONData = JSON.stringify(formData);
+				console.log(myJSONData);
+				var httpReq = new XMLHttpRequest();
+			
+				var url =	"http://localhost/rest-api/api/create.php";
+				httpReq.open("POST", url, true);
+				httpReq.send(myJSONData);
+
+				httpReq.onload = function () {
+					console.log(httpReq.status);
+					if(httpReq.status==200) {
+						alert("data inserted");
+						document.getElementById('addNewEmployee').reset();
+						getAllData();
+					} else {
+						alert("somethimg error");
+					}
+				};	
+
+			}
+			return false;	
+		}
+		function deleteData (id){
+			var myJSONData = {id: id};
+	    	myJSONData = JSON.stringify(myJSONData);
+	    	var httpReq = new XMLHttpRequest();
+
+			var url = "http://localhost/rest-api/api/delete.php"
+			httpReq.open("POST", url , true);
+			httpReq.send(myJSONData);
+			// console.log(httpReq);
+
+			httpReq.onload = function () {
+
+				if (httpReq.status===200) {
+					alertSuccess.style.display = 'block';
+					getAllData();
+				} else {
+					alertDanger.style.display = 'block';
+				}
+				setTimeout(myGreeting, 2000);
+			};
+			function myGreeting() {
+				alertSuccess.style.display = 'none';
+				alertDanger.style.display = 'none';
+			}
+
+		}
+
+		function editData(id) {
+
+			document.getElementById('btn_add').style.display = 'none';
+
+			document.getElementById('btn_add_update').innerHTML = "<button type='submit' id='btn_update' name='update' class='update' onclick='return updateData("+id+");'>Update</button>";
+
+			var httpReq = new XMLHttpRequest();
+			httpReq.open("GET" , "http://localhost/rest-api/api/single_read.php?id="+id+"", false);
+
+			httpReq.send( null );
+			var finalData = JSON.parse(httpReq.responseText);
+			// console.log(finalData);
+
+			document.getElementById('name').value = finalData.name;
+		    document.getElementById('email').value = finalData.email;
+		    document.getElementById('age').value = finalData.age;
+		    var op = document.getElementById('designation').options;
+		    for (let i = 0; i < op.length; i++) {
+		    	if(op[i].value==finalData.designation) {
+		    		op[i].setAttribute('selected', true);
+		
+		    	} 
+			  
+			}
+			console.log(op);
+	   	}
+
+	   		function updateData(id) {
+			var e1 		= 	document.getElementById('e1');
+	    	var e2 		= 	document.getElementById('e2');
+	    	var e3 		= 	document.getElementById('e3');
+	    	var e4 		= 	document.getElementById('e4');
+
+	    	var nameOfUser 	= 	document.getElementById('name').value;
+	    	var email 	= 	document.getElementById('email').value;
+	    	var age 	= 	document.getElementById('age').value;
+	    	var designation 	= 	document.getElementById('designation').value;
+
+	    	if(nameOfUser=='') {
+	    		e1.innerHTML = 'Name can not be blank';
+	    		e1.style.color = 'red';
+	    	} else {
+	    		e1.innerHTML = '';
+	    	}
+
+	    	if(email=='') {
+	    		e2.innerHTML = 'Email can not be blank';
+	    		e2.style.color = 'red';
+	    	} else {
+	    		e2.innerHTML = '';
+	    	}
+
+	    	if(age=='') {
+	    		e3.innerHTML = 'Age can not be blank';
+	    		e3.style.color = 'red';
+	    	} else {
+	    		e3.innerHTML = '';
+	    	}
+
+	    	if(designation=='') {
+	    		e4.innerHTML = 'designation can not be blank';
+	    		e4.style.color = 'red';
+	    	} else {
+	    		e4.innerHTML = '';
+	    	}
+
+	    	if((nameOfUser && email && age && designation)!=='') {
+	    		
+	    		let formData = {id: id, name: nameOfUser, email: email, age: age, designation: designation, created: "2022-06-06 05:12:50"};
+
+	    		let myJSONData = JSON.stringify(formData);
+
+
+	    		var httpReq = new XMLHttpRequest();
+				httpReq.open( "POST", "http://localhost/rest-api/api/update.php", true ); 
+			    httpReq.send( myJSONData );
+				document.getElementById('btn_add').style.display = 'block';
+				document.getElementById('btn_update').style.display = 'none';			    
+			 	getAllData();
+			 	document.getElementById("addNewEmployee").reset();
+
+	    	}
+
+	    	return false;
+	    }
+
+	    	function showData(id){
+	    	var httpReq = new XMLHttpRequest();
+			
+			httpReq.open( "GET", "http://localhost/rest-api/api/single_read.php?id="+id+"", false )
+		    httpReq.send( null );
+		    var finalData = JSON.parse(httpReq.responseText);
+
+		    console.log(finalData);
+
+		    alert(finalData.name);
+	    }
+    </script>
+</body>
+</html>

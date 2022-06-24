@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        label{
+            padding-right: 30px;
+            margin-left: 10px;
+        }
+        input{
+         padding-left: 50px; 
+        }
+    </style>
+    <title>form2</title>
+</head>
+<body>
+    <table>
+    <form method="post">
+        <tr>
+            <th>Username:</th>
+            <td><input type="text" name="Username">
+                <br><br></td>
+        </tr>
+        <tr>
+            <th>Password:</th>
+            <td><input type="password" name="Password">
+                <br><br></td>
+        </tr>
+        <tr>
+            <th>City of<br>
+                Employment:</th>
+            <td> <input type="text">
+                <br><br></td>
+        </tr>
+        <tr>
+            <th>Web Server:</th>
+            <td><select name="web-service">
+                <option value=>--Choose a server--</option>
+            </select>
+            <br><br></td>
+        </tr>
+        <tr>
+            <th>Please Specify<br>
+                Your Role:</th>
+            <td><input type="radio" name="role1" value="Admin">Admin<br>
+                <input type="radio" name="role2" value="Engineer">Engineer<br>
+                <input type="radio" name="role3" value="Manager">Manager<br>
+                <input type="radio" name="role4" value="Guest">Guest
+                <br><br></td>
+        </tr>
+        <tr>
+           <th>Single Sign ON:</th> 
+           <td><input type="checkbox" name="sign-on1" value="Mail"> Mail
+            <br><br>
+            <input type="checkbox" name="sign-on2" value="Payroll"> Payroll
+            <br><br>
+            <input type="checkbox" name="sign-on3" value="Self-service"> Self-Service
+            <br><br></td>
+        </tr>
+        <tr>
+            <th><button type="button">Login</button></th>
+            <th><button type="reset">reset</button></th>
+        </tr>
+     </form>
+    </table>
+</body>
+</html>

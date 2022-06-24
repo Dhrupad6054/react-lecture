@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Image Gallery | HTML</title>
+	<style type="text/css">
+		header {
+			text-align: center;
+		}
+		.col {
+			width: 25%;
+			float: left;
+		}
+		.row::after {
+			content: "";
+			display: table;
+			clear: both;	
+		}
+
+		img {
+			width: 100%;
+			height: 220px;
+		}
+
+		/*.image {
+			padding: 4px;
+		}*/
+
+		@media screen and (min-width: 320px) and (max-width: 480px){
+		    /* styles */
+
+		    /*body {
+		    	background-color: red;
+		    }*/
+
+		    .col {
+		    	width: 100%;
+		    }
+
+
+		}
+		
+		figure {
+		    border: thin #c0c0c0 solid;
+		    padding: 5px;
+		    margin: auto;
+		}
+
+		figcaption {
+		    background-color: #222;
+		    color: #fff;
+		    font: italic smaller sans-serif;
+		    padding: 3px;
+		    text-align: center;
+		}
+		@media screen and (min-width: 768px) and (max-width: 1024px){
+		    /* styles */
+
+		    /*body {
+		    	background-color: blue;
+		    }*/
+		    .col {
+		    	width: 50%;
+		    }
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<h1>Image Gallery In HTML</h1>
+		<p>This is Image Galley Developed By Sharvan Kumar</p>
+	</header>
+
+	<!-- <figure style="border: 1px solid black;">
+		<img src="https://i.pinimg.com/originals/9c/b0/70/9cb070d62dc738a0c3a1a408d68e4af5.jpg">
+		<figcaption style="text-align:center;">This is First</figcaption>
+	</figure> -->
+
+	<div class="main-content">
+		<div class="container">
+			<div class="row">
+				<div class="col">
+					<div class="image">
+							<figure>
+							    <img src="https://interactive-examples.mdn.mozilla.net/media/cc0-images/elephant-660-480.jpg"
+							         alt="Elephant at sunset">
+							    <figcaption>An elephant at sunset</figcaption>
+							</figure>
+					</div>
+				</div>
+				<div class="col">
+					<div class="image">
+						<figure style="border: 1px solid black;">
+							<img src="https://images.news18.com/ibnlive/uploads/2021/07/1627377451_nature-1200x800.jpg?im=Resize,width=360,aspect=fit,type=normal?im=Resize,width=320,aspect=fit,type=normal">
+							<figcaption style="text-align:center;">This is First</figcaption>
+						</figure>
+					</div>
+				</div>
+				<div class="col">
+					<div class="image">
+						<figure style="border: 1px solid black;">
+							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg">
+							<figcaption style="text-align:center;">This is First</figcaption>
+						</figure>
+					</div>
+				</div>
+				<div class="col">
+					<div class="image">
+						<figure style="border: 1px solid black;">
+							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg">
+							<figcaption style="text-align:center;">This is First</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col">
+					<div class="image">
+						<figure style="border: 1px solid black;">
+							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg">
+							<figcaption style="text-align:center;">This is First</figcaption>
+						</figure>
+					</div>
+				</div>
+				<div class="col">
+					<div class="image">
+						<figure style="border: 1px solid black;">
+							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg">
+							<figcaption style="text-align:center;">This is First</figcaption>
+						</figure>
+					</div>
+				</div>
+				<div class="col">
+					<div class="image">
+						<figure style="border: 1px solid black;">
+							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg">
+							<figcaption style="text-align:center;">This is First</figcaption>
+						</figure>
+					</div>
+				</div>
+				<div class="col">
+					<div class="image">
+						<figure style="border: 1px solid black;">
+							<img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg">
+							<figcaption style="text-align:center;">This is First</figcaption>
+						</figure>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        .header {
+            background-color: rgb(231, 226, 226);
+            padding: 8px;
+            text-align: center;
+        }
+        .nav {
+            background-color: rgb(231, 226, 226);
+            padding: 8px;
+            margin-top: 20px;
+            text-align: center;            
+        }
+        a {
+            padding: 15px;
+            margin: 10px;
+        }
+        .second-header {
+            background-color: rgb(231, 226, 226);
+            padding: 8px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .column {
+            width: 33.33%;
+            float: left;
+        }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+        .left-column {
+            background-color: rgb(231, 226, 226);
+            padding: 27px;
+            margin: 1px;
+        }
+      
+        .middle-column {
+            background-color: rgb(231, 226, 226);
+            padding: 27px;
+            margin: 1px;
+            text-align: center;
+        }
+        .right-column {
+            background-color: rgb(231, 226, 226);
+            padding: 28px;
+            margin: 1px;
+            text-align: center;
+        }
+        .footer {
+            padding: 10px;
+            text-align: center;
+            background: #ddd;
+            margin-top: 33px;
+        }
+        
+        @media screen and (min-width: 320px) and (max-width: 880px){
+            .column {   
+                width: 100%;
+            }
+        }
+
+        button {
+            background-color: #0D6EFD;
+            color: white;
+            padding: 10px 20px;
+            font-size: 20px;
+            border: none;
+            border-radius: 7px;
+        }
+
+        button:hover {
+            background-color: blue;
+        }
+    </style>
+    <title>form</title>
+</head>
+<body>
+    <div class="header">
+        <h2>LOGO</h2>
+    </div>
+
+    <div class="nav">   
+        <a href="#">Home</a>
+        <a href="#">Products</a>
+        <a href="#">Service</a>
+        <a href="#">About</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <div class="main-content">        
+        <div class="second-header">
+            <h3>Feature</h3>
+            <button>Primary</button>
+            <button type="button" class="btn btn-primary">Primary</button>
+
+        </div>    
+        <div class="row">
+            <div class="column">
+                <div class="left-column">
+                   <h3>Column One</h3>
+                </div>
+            </div>    
+            <div class="column">
+                <div class="middle-column">
+                    <h3>Column Two</h3>
+                </div>
+            </div>
+            <div class="column">
+                <div class="right-column">
+                    <h3>Column Three</h3>
+                </div>
+            </div>            
+        </div>
+    </div>
+    <div class="footer">
+        <h3>footer</h3>
+    </div>
+</body>
+</html>
